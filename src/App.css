@@ -5,7 +5,7 @@
   font-size: 1.2rem;
 }
 
-.registerForm {
+.genericForm {
   background-color: red;
   display: flex;
   flex-direction: column;
@@ -13,13 +13,13 @@
   align-items: center;
 }
 
-.registerForm__item {
+.genericForm__item {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.registerForm__item input, .registerForm__button {
+.genericForm__item input, .genericForm__button {
   padding: 5px;
   background-color: white;
   color: black;

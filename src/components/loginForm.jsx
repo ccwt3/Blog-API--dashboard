@@ -1,24 +1,25 @@
-import { post, get } from "../../services/fetcher";
+import { get, post } from "../../services/fetcher";
 import { GenericForm } from "./form";
 
-async function registerSubmit(event) {
+async function loginSubmit(event) {
   event.preventDefault();
+
   const formData = new FormData(event.target);
   const values = Object.fromEntries(formData);
 
-  const response = await post(values, "/auth/register");
+  const response = await post(values, "/auth/login");
 
   if (response.status === 201) {
     console.log(response.message);
     const me = await get("/users/me");
     console.log(me);
   } else if (response.status === 401) {
-    console.log("register failed");
+    console.log("login failed");
   } else {
     console.log(response.status);
   }
 }
 
-export function RegisterForm() {
-  return <GenericForm handleSubmit={registerSubmit} type={"Register"}/>;
+export function LoginForm() {
+  return <GenericForm handleSubmit={loginSubmit} type={"Login"}/>
 }
