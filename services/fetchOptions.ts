@@ -8,7 +8,7 @@ export const getOptions: object = {
   },
 };
 
-export const postOptions: object = (params: Object)  => {
+export const postOptions = (params: object)  => {
   return {
     method: "POST",
     credentials: "include" as const,
