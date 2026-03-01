@@ -1,4 +1,9 @@
-export function GenericForm({ handleSubmit, type }) {
+type FormProps = {
+  type: "Login" | "Register";
+  handleSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void;
+};
+
+export function GenericForm({ handleSubmit, type }: FormProps) {
   return (
     <form className="genericForm" onSubmit={handleSubmit}>
       <h1>{type}</h1>

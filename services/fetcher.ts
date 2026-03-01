@@ -1,7 +1,7 @@
 const BASE_URL = "http://localhost:3000";
 import { getOptions, postOptions, apiEndpoints } from "./fetchOptions";
 
-export async function post(params = {}, endpoint) {
+export async function post(params = {}, endpoint: string) {
   if (!apiEndpoints.includes(endpoint)) {
     return {
       status: 401,
@@ -19,7 +19,7 @@ export async function post(params = {}, endpoint) {
   };
 }
 
-export async function get(endpoint) {
+export async function get(endpoint: string) {
   if (!apiEndpoints.includes(endpoint)) {
     return {
       status: 401,
