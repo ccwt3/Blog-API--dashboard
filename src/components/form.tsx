@@ -1,9 +1,18 @@
+import { isUserLoged } from "../../services/isLoged";
+import { useNavigate } from "react-router-dom";
+
 type FormProps = {
   type: "Login" | "Register";
   handleSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void;
 };
 
 export function GenericForm({ handleSubmit, type }: FormProps) {
+  const navigate = useNavigate();
+
+  isUserLoged().then((res) => {
+    if (res) return navigate("/");
+  });
+
   return (
     <form className="genericForm" onSubmit={handleSubmit}>
       <h1>{type}</h1>
