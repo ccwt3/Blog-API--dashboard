@@ -1,4 +1,4 @@
-export const apiEndpoints = ["/auth/login", "/auth/register", "/users/me"];
+export const apiEndpoints = ["/auth/login", "/auth/register", "/users/me", "/posts"];
 
 export const getOptions: object = {
   method: "GET",
