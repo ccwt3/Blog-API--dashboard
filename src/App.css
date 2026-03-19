@@ -26,3 +26,27 @@
   border: 1px solid black;
   border-radius: 5px;
 }
+
+/**/
+.posts__item {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  margin: 1rem;
+}
+
+.posts__item h3, p {
+  margin: 0.5rem;
+}
+
+.posts__header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.posts__body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -3,6 +3,7 @@ import { get } from "../../services/fetcher";
 import { Posts } from "./postFormat";
 
 interface PostsStructure {
+  id: string;
   title: string;
   message: string;
   published_time: string;
@@ -23,6 +24,7 @@ export function PostsFeed() {
           title={p.title}
           body={p.message}
           published_time={p.published_time}
+          key={p.id}
         />
       ));
 

@@ -5,11 +5,13 @@ interface PostsProps {
 }
 
 export function Posts({ title, body, published_time }: PostsProps) {
+  const shortedDate = published_time.split("T");
+  
   return (
     <div className="posts__item">
       <div className="posts__header">
         <h3>{title}</h3>
-        <p>{published_time}</p>
+        <p>{shortedDate[0]}</p>
       </div>
 
       <p className="posts__body">{body}</p>
