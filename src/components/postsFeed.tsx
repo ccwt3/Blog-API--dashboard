@@ -24,6 +24,7 @@ export function PostsFeed() {
           title={p.title}
           body={p.message}
           published_time={p.published_time}
+          id={p.id}
           key={p.id}
         />
       ));

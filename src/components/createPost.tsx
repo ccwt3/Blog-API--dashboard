@@ -14,7 +14,7 @@ async function createPostHandler(
   const inputs = Object.fromEntries(formData);
 
   if (!inputs.title && !inputs.message) {
-    return console.log("nothinng here");
+    return console.log("Must fill the spaces");
   }
 
   const response = await post(

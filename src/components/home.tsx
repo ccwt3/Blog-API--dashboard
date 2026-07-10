@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { get } from "../../services/fetcher";
+import { get, post } from "../../services/fetcher";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { CreatePost } from "./createPost";
 import { PostsFeed } from "./postsFeed";
+import { Logout } from "./logout";
 
 //todo Change the route to posts later, /me is currently for testing
 
@@ -12,9 +13,17 @@ export function Home() {
   const [userInfo, setUserInfo] = useState({ username: "jose" });
 
   useEffect(() => {
-    get("/users/me").then((res) => {
-      if (res.status !== 200) {
-        return navigate("/login");
+    get("/users/me").then(async (res) => {
+      if (!(res.status === 200 || res.status === 201)) {
+        const refreshResponse = await post({}, "/auth/refresh");
+        console.log(refreshResponse.status, refreshResponse.message);
+
+        if (refreshResponse.status !== 200) {
+          return navigate("/login");
+        }
+
+        const retryResponse = await get("/users/me");
+        res = retryResponse;
       }
 
       setUserInfo({ username: res.resBody.user.username });
@@ -26,7 +35,10 @@ export function Home() {
     <main>
       <h1>Welcome back {userInfo.username}</h1>
 
-      <CreatePost />
+      <div>
+        <Logout />
+        <CreatePost />
+      </div>
       <PostsFeed />
     </main>
   );
