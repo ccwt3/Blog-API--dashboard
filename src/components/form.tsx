@@ -1,5 +1,5 @@
 import { isUserLoged } from "../../services/isLoged";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 type FormProps = {
   type: "Login" | "Register";
@@ -14,20 +14,35 @@ export function GenericForm({ handleSubmit, type }: FormProps) {
   });
 
   return (
-    <form className="genericForm" onSubmit={handleSubmit}>
-      <h1>{type}</h1>
+    <div className="authPage">
+      <form className="genericForm" onSubmit={handleSubmit}>
+        <h1>{type}</h1>
+        <p>do no enter real credential</p>
 
-      <div className="genericForm__item">
-        <label htmlFor="username">Username: </label>
-        <input type="text" name="username" id="username" />
-      </div>
+        <div className="genericForm__item">
+          <label htmlFor="username">Username</label>
+          <input type="text" name="username" id="username" />
+        </div>
 
-      <div className="genericForm__item">
-        <label htmlFor="password">Password: </label>
-        <input type="password" name="password" id="password" />
-      </div>
+        <div className="genericForm__item">
+          <label htmlFor="password">Password</label>
+          <input type="password" name="password" id="password" />
+        </div>
 
-      <button className="genericForm__button">{type}</button>
-    </form>
+        <button className="btn btn-primary btn-block">{type}</button>
+
+        <p className="genericForm__footer">
+          {type === "Login" ? (
+            <>
+              No account yet? <Link to="/register">Register</Link>
+            </>
+          ) : (
+            <>
+              Already have an account? <Link to="/login">Login</Link>
+            </>
+          )}
+        </p>
+      </form>
+    </div>
   );
 }

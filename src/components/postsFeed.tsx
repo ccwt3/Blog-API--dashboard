@@ -11,15 +11,32 @@ interface PostsStructure {
 
 export function PostsFeed() {
   const [isLoading, setIsLoading] = useState(true);
-  const [listOfPosts, setListOfPosts] = useState(false);
+  const [posts, setPosts] = useState<PostsStructure[]>([]);
 
   useEffect(() => {
     get("/users/me/posts").then((res) => {
       if (res.status !== 200) {
-        return console.log(res.message);
+        console.log(res.message);
+        setIsLoading(false);
+        return;
       }
 
-      const list = res.resBody.posts.map((p: PostsStructure) => (
+      setPosts(res.resBody.posts ?? []);
+      setIsLoading(false);
+    });
+  }, []);
+
+  if (isLoading) {
+    return <p className="feed-state">Loading posts...</p>;
+  }
+
+  if (posts.length === 0) {
+    return <p className="feed-state">No posts yet. Create your first one.</p>;
+  }
+
+  return (
+    <section className="posts">
+      {posts.map((p) => (
         <Posts
           title={p.title}
           body={p.message}
@@ -27,17 +44,7 @@ export function PostsFeed() {
           id={p.id}
           key={p.id}
         />
-      ));
-
-      setListOfPosts(list);
-      setIsLoading(false);
-    });
-  }, []);
-
-  return (
-    <section>
-      {isLoading && <h1>Hola</h1>}
-      {listOfPosts}
+      ))}
     </section>
   );
 }

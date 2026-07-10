@@ -11,6 +11,7 @@ import { Logout } from "./logout";
 export function Home() {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({ username: "jose" });
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     get("/users/me").then(async (res) => {
@@ -32,14 +33,16 @@ export function Home() {
   }, []);
 
   return (
-    <main>
-      <h1>Welcome back {userInfo.username}</h1>
-
-      <div>
-        <Logout />
-        <CreatePost />
+    <main className="page">
+      <div className="topbar">
+        <h1 className="topbar__greeting">Welcome back, {userInfo.username}</h1>
+        <div className="topbar__actions">
+          <CreatePost onCreated={() => setRefreshKey((k) => k + 1)} />
+          <Logout />
+        </div>
       </div>
-      <PostsFeed />
+
+      <PostsFeed key={refreshKey} />
     </main>
   );
 }
