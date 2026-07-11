@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://blog-api-5jjl.onrender.com";
 import { getOptions, postOptions /*apiEndpoints*/ } from "./fetchOptions";
 
 export async function post(params = {}, endpoint: string) {
