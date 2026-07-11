@@ -1,0 +1,9 @@
+[build]
+  command = "pnpm build"
+  publish = "dist"
+
+# SPA fallback: react-router maneja las rutas en el cliente
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
